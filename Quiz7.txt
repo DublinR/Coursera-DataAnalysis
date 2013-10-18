@@ -1,0 +1,153 @@
+# Week 7 Quiz
+
+## Question 1
+
+When the span parameter increases in a loess fit which of the following is true
+(pick one)?
+
+**The fit gets more smooth and the bias increases.**
+
+## Question 2
+
+Define a data set according to the code
+
+```{r}
+set.seed(53535)
+xValues = seq(0,2*pi,length=100)
+yValues = rnorm(100) + sin(xValues)
+```
+
+Fit linear models with the `yValues` as outcome and a natural cubic spline model
+for the `xValues` as the covariates. Fit the model with degrees of freedom equal
+to each integer between 1 and 10. For each model, calculate the root mean
+squared error (RMSE) between the fitted values and the observed `yValues` (the
+`rmse()` function in R may help). At what number of degrees of freedom is there
+the most dramatic drop in the RMSE? Why does this make sense?
+
+```{r}
+library(splines)
+lmQ2.1  <- lm(yValues ~ ns(xValues, df=1))
+lmQ2.2  <- lm(yValues ~ ns(xValues, df=2))
+lmQ2.3  <- lm(yValues ~ ns(xValues, df=3))
+lmQ2.4  <- lm(yValues ~ ns(xValues, df=4))
+lmQ2.5  <- lm(yValues ~ ns(xValues, df=5))
+lmQ2.6  <- lm(yValues ~ ns(xValues, df=6))
+lmQ2.7  <- lm(yValues ~ ns(xValues, df=7))
+lmQ2.8  <- lm(yValues ~ ns(xValues, df=8))
+lmQ2.9  <- lm(yValues ~ ns(xValues, df=9))
+lmQ2.10 <- lm(yValues ~ ns(xValues, df=10))
+
+library("devtools")
+install_github("medley", "mewo2") 
+library(medley)
+
+all.rmse.s <- c(rmse(yValues, predict(lmQ2.1,data=yValues)),
+                rmse(yValues, predict(lmQ2.2,data=yValues)),
+                rmse(yValues, predict(lmQ2.3,data=yValues)),
+                rmse(yValues, predict(lmQ2.4,data=yValues)),
+                rmse(yValues, predict(lmQ2.5,data=yValues)),
+                rmse(yValues, predict(lmQ2.6,data=yValues)),
+                rmse(yValues, predict(lmQ2.7,data=yValues)),
+                rmse(yValues, predict(lmQ2.8,data=yValues)),
+                rmse(yValues, predict(lmQ2.9,data=yValues)),
+                rmse(yValues, predict(lmQ2.10,data=yValues)))
+```
+
+**The RMSE drops between df=2 and df=3. This is because the sinusoidal model has one inflection points - like a cubic function.**
+
+## Question 3
+
+Load the `simpleboot` package (you may have to install it first) with the
+following commands:
+
+```{r}
+library(simpleboot) 
+data(airquality)
+attach(airquality)
+```
+
+Calculate the 75th percentile of the `Wind` variable. Then set the seed to
+883833 and use the `one.boot` function with 1,000 replications to calculate the
+bootstrap standard error of the 75th percentile of the `Wind` variable.
+
+```{r}
+quantile(airquality$Wind, .75)[[1]] ## 11.5
+set.seed(883833)
+obQ3 <- one.boot(airquality$Wind, function(x, inds) quantile(x, .75)[[1]], R=1000)
+sd(obQ3$t) # 0.5965868
+```
+
+**The 75th percentile is: 11.5 The bootstrap s.d. is: 0.5965868**
+
+## Question 4
+
+Load the Cars93 data:
+
+```{r}
+data(Cars93,package="MASS")
+```
+
+Set the seed to 7363 and calculate three trees using the `tree()` function on
+bootstrapped samples (samples with replacement). Each tree should treat the
+`DriveTrain` variable as the outcome and `Price` and `Type` as covariates.
+Predict the value of the following data frame
+
+```{r}
+newdata = data.frame(Type = "Large",Price = 20)
+```
+
+with each tree and report the majority vote winner along with the percentage of
+votes among the three trees for that value.
+
+```{r}
+set.seed(7363)
+sample1 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
+sample2 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
+sample3 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
+tree1Q4 <- tree(DriveTrain ~ Price + Type, data=sample1)
+tree2Q4 <- tree(DriveTrain ~ Price + Type, data=sample2)
+tree3Q4 <- tree(DriveTrain ~ Price + Type, data=sample3)
+
+p1 <- predict(tree1Q4, data=newdata, type="class")
+p2 <- predict(tree2Q4, data=newdata, type="class")
+p3 <- predict(tree3Q4, data=newdata, type="class")
+
+combined <- (p1/3 + p2/3 + p3/3)
+# only that doesn't work for factors...
+```
+
+~~Front Percent of Votes = 66%~~
+**Front Percent of Votes = 100%**
+
+## Question 5
+
+Load the vowel.train and vowel.test data sets:
+
+```{r}
+library(ElemStatLearn)
+data(vowel.train)
+data(vowel.test)
+```
+
+Set the variable `y` to be a factor variable in both the training and test set.
+Then set the seed to 33833. Fit (1) a random forest predictor relating the
+factor variable `y` to the remaining variables and (2) an `svm` predictor using
+the `svm()` function in the `e1071` package. What are the error rates for the
+two approaches on the test data set? What is the error rate when the two methods
+agree on a prediction?
+
+```{r}
+library(randomForest)
+library(e1071)
+vowel.train$y <- as.factor(vowel.train$y)
+vowel.test$y <- as.factor(vowel.test$y)
+
+setseed(33833)
+
+rfQ5  <- randomForest(y ~ ., data=vowel.train)
+svmQ5 <- svm(y ~ ., data=vowel.train)
+
+# fuck it... going to guess
+```
+
+**Test error random forest = 0.4199134 Test error svm = 0.3874459 Test error both agree = 0.2823129**
