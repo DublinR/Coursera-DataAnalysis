@@ -1,0 +1,204 @@
+# Week 2 Quiz
+
+## Question 1
+
+In the text of the final write-up of a data analysis, how should the analyses be reported?
+
+**Analyses should be reported in an order to convey the story being told with the data analysis.**
+
+## Question 2
+
+Open a connection to the old version of my blog: `http://simplystatistics.tumblr.com/`, read the first 150 lines of the file and assign them to a vector `simplyStats`. Apply the `nchar()` function to `simplyStats` to count the characters in each element of `simplyStats`. How many characters long are the lines 2, 45, and 122?
+
+```{r}
+# open a connection to http://simplystatistics.tumblr.com/ & assign to vector `simplyStats`
+simplyStats <- readLines(url('http://simplystatistics.tumblr.com/'), 150)
+
+# apply `nchar()`
+simplyStatsChars <- nchar(simplyStats)
+# how many characters long is line 2?
+simplyStatsChars <- nchar(simplyStats)[2]
+# how many characters long is line 45?
+simplyStatsChars <- nchar(simplyStats)[45]
+# how many characters long is line 122?
+simplyStatsChars <- nchar(simplyStats)[122]
+```
+
+**918, 5, 24**
+
+## Question 3
+
+The American Community Survey distributes downloadable data about United States communities. Download the 2006 microdata survey about housing for the state of Idaho using download.file() from here: 
+
+https://dl.dropbox.com/u/7710864/data/csv_hid/ss06hid.csv
+
+or here:
+
+https://spark-public.s3.amazonaws.com/dataanalysis/ss06hid.csv 
+
+and load the data into R. You will use this data for the next several questions. The code book, describing the variable names is here: 
+
+https://dl.dropbox.com/u/7710864/data/PUMSDataDict06.pdf
+
+or here: 
+
+https://spark-public.s3.amazonaws.com/dataanalysis/PUMSDataDict06.pdf
+
+How many housing units in this survey were worth more than $1,000,000?
+
+```{r}
+# Download 2006 microdata survey re: housing for Idaho using download.file()
+setwd("~/Desktop/coursera-data-analysis/quizzes")
+download.file('https://spark-public.s3.amazonaws.com/dataanalysis/ss06hid.csv',
+              "ss06hid.csv", method="curl")
+
+# Download the code book:
+download.file('https://spark-public.s3.amazonaws.com/dataanalysis/PUMSDataDict06.pdf',
+              "PUMSDataDict06.pdf", method="curl")
+
+# load the data into R
+idahoData <- read.csv("ss06hid.csv", header=TRUE)
+
+# [MINE] are we sure it's just Idaho data?
+unique(idahoData$ST)
+
+# How many housing units [are] worth more than $1,000,000?
+nrow(idahoData[idahoData$TYPE==1 & !is.na(idahoData$VAL) & idahoData$VAL==24,])
+```
+
+**53**
+
+## Question 4
+
+Use the data you loaded from Question 3. Consider the variable FES. Which of the "tidy data" principles does this variable violate?
+
+```{r}
+# let's look!
+unique(idahoData$FES)
+```
+
+_Consider the answers..._
+
+- Each tidy data table contains information about only one type of observation.
+- Each variable in a tidy data set has been transformed to be interpretable.
+- Tidy data has no missing values.
+- **Tidy data has one variable per column.**
+  - (this column conflates several variables)
+
+## Question 5
+
+Use the data you loaded from Question 3. How many households have 3 bedrooms and and 4 total rooms? How many households have 2 bedrooms and 5 total rooms? How many households have 2 bedrooms and 7 total rooms?
+
+```{r}
+# How many households have 3 bedrooms and 4 total rooms?
+nrow(idahoData[!is.na(idahoData$BDS) & idahoData$BDS==3 &
+                 !is.na(idahoData$BDS) & idahoData$RMS==4,])
+# How many households have 2 bedrooms and 5 total rooms?
+nrow(idahoData[!is.na(idahoData$BDS) & idahoData$BDS==2 &
+                 !is.na(idahoData$BDS) & idahoData$RMS==5,])
+# How many households have 2 bedrooms and 7 total rooms?
+nrow(idahoData[!is.na(idahoData$BDS) & idahoData$BDS==2 &
+                 !is.na(idahoData$BDS) & idahoData$RMS==7,])
+
+# [mine] [question] More elegant way to filter out non-NA values?
+```
+
+**148, 386, 49**
+
+## Question 6
+
+Use the data from Question 3. **Create a logical vector that identifies the households on greater than 10 acres who sold more than $10,000 worth of agriculture products**. Assign that logical vector to the variable `agricultureLogical`. Apply the `which()` function like this to identify the rows of the data frame where the logical vector is `TRUE`.
+
+```{r}
+ which(agricultureLogical) 
+```
+
+What are the first 3 values that result?
+
+```{r}
+# [mine] neat trick that I wound up not needing
+q6cols <- c("ACR", "AGS")
+which(names(idahoData) %in% q6cols)
+agricultureLogical <- idahoData$ACR==3 & idahoData$AGS==6
+
+# and:
+ which(agricultureLogical) 
+```
+
+**125, 238, 262**
+
+## Question 7
+
+Use the data from Question 3. Create a logical vector that identifies the households on greater than 10 acres who sold more than $10,000 worth of agriculture products. Assign that logical vector to the variable agricultureLogical. Apply the which() function like this to identify the rows of the data frame where the logical vector is TRUE and assign it to the variable indexes. 
+
+```{r}
+indexes =  which(agricultureLogical) 
+```
+
+If your data frame for the complete data is called dataFrame you can create a data frame with only the above subset with the command: 
+
+```{r}
+subsetDataFrame  = dataFrame[indexes,] 
+```
+
+Note that we are subsetting this way because the NA values in the variables will cause problems if you subset directly with the logical statement. How many households in the subsetDataFrame have a missing value for the mortgage status (MRGX) variable?
+
+```{r}
+# Do what they ask...
+indexes <- which(agricultureLogical)
+subsetIdahoData <- idahoData[indexes,]
+
+# And then:
+nrow(subsetDataFrame[is.na(subsetIdahoData$MRGX),])
+```
+
+**8**
+
+## Question 8
+
+Use the data from Question 3. Apply `strsplit()` to split all the names of the data frame on the characters "wgtp". What is the value of the 123 element of the resulting list?
+
+```{r}
+strsplit(names(idahoData), "wgtp")[123]
+```
+
+**"" "15"**
+
+## Question 9
+
+What are the 0% and 100% quantiles of the variable YBL? Is there anything wrong with these values? Hint: you may need to use the na.rm parameter.
+
+```{r}
+quantile(idahoData$YBL, na.rm=TRUE)
+#  0%  25%  50%  75% 100% 
+#  -1    3    5    7   25 
+```
+
+## Question 10
+
+In addition to the data from Question 3, the American Community Survey also collects data about populations. Using `download.file()`, download the population record data from: 
+
+https://dl.dropbox.com/u/7710864/data/csv_hid/ss06pid.csv 
+
+or here:
+
+https://spark-public.s3.amazonaws.com/dataanalysis/ss06pid.csv
+
+Load the data into R. Assign the housing data from Question 3 to a data frame `housingData` and the population data from above to a data frame `populationData`.
+
+Use the merge command to merge these data sets based only on the common identifier "SERIALNO". What is the dimension of the resulting data set? 
+
+[OPTIONAL] For fun, you might look at the data and see what happened when they merged.
+
+```{r}
+download.file('https://spark-public.s3.amazonaws.com/dataanalysis/ss06pid.csv',
+              'ss06pid.csv', method='curl')
+
+rm(idahoData)
+housingData <- read.csv("ss06hid.csv", header=TRUE)
+populationData <- read.csv("ss06pid.csv", header=TRUE)
+
+dim(merge(housingData, populationData, by="SERIALNO", all=TRUE))
+```
+
+**number of rows = 15451, number of columns = 426**
