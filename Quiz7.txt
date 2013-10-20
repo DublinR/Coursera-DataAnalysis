@@ -1,13 +1,14 @@
 # Week 7 Quiz
-
-## Question 1
+%-------------------------------------------------------------------------%
+\subsection{Question 1}
 
 When the span parameter increases in a loess fit which of the following is true
 (pick one)?
 
 **The fit gets more smooth and the bias increases.**
 
-## Question 2
+%-------------------------------------------------------------------------%
+\subsection{Question 2}
 
 Define a data set according to the code
 
@@ -55,31 +56,33 @@ all.rmse.s <- c(rmse(yValues, predict(lmQ2.1,data=yValues)),
 
 **The RMSE drops between df=2 and df=3. This is because the sinusoidal model has one inflection points - like a cubic function.**
 
-## Question 3
+%-------------------------------------------------------------------------%
+\subsection{Question 3}
 
 Load the `simpleboot` package (you may have to install it first) with the
 following commands:
 
-```{r}
+\begin{verbatim}
 library(simpleboot) 
 data(airquality)
 attach(airquality)
-```
+\end{verbatim}
 
 Calculate the 75th percentile of the `Wind` variable. Then set the seed to
 883833 and use the `one.boot` function with 1,000 replications to calculate the
 bootstrap standard error of the 75th percentile of the `Wind` variable.
 
-```{r}
+\begin{verbatim}
 quantile(airquality$Wind, .75)[[1]] ## 11.5
 set.seed(883833)
 obQ3 <- one.boot(airquality$Wind, function(x, inds) quantile(x, .75)[[1]], R=1000)
 sd(obQ3$t) # 0.5965868
-```
+\end{verbatim}
 
 **The 75th percentile is: 11.5 The bootstrap s.d. is: 0.5965868**
 
-## Question 4
+%-------------------------------------------------------------------------%
+\subsection{Question 4}
 
 Load the Cars93 data:
 
@@ -92,14 +95,14 @@ bootstrapped samples (samples with replacement). Each tree should treat the
 `DriveTrain` variable as the outcome and `Price` and `Type` as covariates.
 Predict the value of the following data frame
 
-```{r}
+\begin{verbatim}
 newdata = data.frame(Type = "Large",Price = 20)
-```
+\end{verbatim}
 
 with each tree and report the majority vote winner along with the percentage of
 votes among the three trees for that value.
 
-```{r}
+\begin{verbatim}
 set.seed(7363)
 sample1 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
 sample2 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
@@ -114,20 +117,20 @@ p3 <- predict(tree3Q4, data=newdata, type="class")
 
 combined <- (p1/3 + p2/3 + p3/3)
 # only that doesn't work for factors...
-```
+\end{verbatim}
 
 ~~Front Percent of Votes = 66%~~
 **Front Percent of Votes = 100%**
-
-## Question 5
+%-------------------------------------------------------------------------%
+\subsection{Question 5}
 
 Load the vowel.train and vowel.test data sets:
 
-```{r}
+\begin{verbatim}
 library(ElemStatLearn)
 data(vowel.train)
 data(vowel.test)
-```
+\end{verbatim}
 
 Set the variable `y` to be a factor variable in both the training and test set.
 Then set the seed to 33833. Fit (1) a random forest predictor relating the
