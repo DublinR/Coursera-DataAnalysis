@@ -1,6 +1,6 @@
 # Week 5 Quiz
-
-## Question 1
+%-------------------------------------------------------------------------%
+\subsection{Question 1}
 
 Load the weaving data with the commands:
 
@@ -19,8 +19,8 @@ summary(warpANOVA)
 ```
 
 **The degrees of freedom for tension is 2 and the F-statistic is 7.537.**
-
-## Question 2
+%-------------------------------------------------------------------------%
+\subsection{Question 2}
 
 Suppose that the probability an event is true is 0.2. What are the log odds of that event?
 
@@ -29,8 +29,8 @@ log( (0.2 / (1 - 0.2)) )
 ```
 
 **-1.3863**
-
-## Question 3
+%-------------------------------------------------------------------------%
+\subsection{Question 3}
 
 Load the [horseshoe crab](http://en.wikipedia.org/wiki/Horseshoe_crab) data using the commands:
 
@@ -63,8 +63,8 @@ exp(crabsGLM$coefficients[[2]])
 ~~0.1640~~
 **1.1782**
 _And/but: just a guess! (How do I arrive at the real answer?)_
-
-## Question 4
+%-------------------------------------------------------------------------%
+\subsection{Question 4}
 
 Load the horseshoe crab data using the commands:
 
@@ -86,17 +86,18 @@ What is the expected number of Satellites for a female of width 22cm?
 **1.3556**
 _And/but: just a guess! (How do I arrive at the real answer?)_
 
-## Question 5
+%-------------------------------------------------------------------------%
+\subsection{Question 5}
 
 Load the school absenteeism data set and fit a linear model relating the log of
 the number of days absent to the other variables with the commands:
 
-```{r}
+\begin{verbatim}
 library(MASS)
 data(quine)
 # dot means all variables
 lm1 <- lm(log(Days+2.5) ~ ., data=quine)
-```
+\end{verbatim}
 
 Use the `step()` function in R to perform model selection using default
 parameters. What variables remain in the model after model selection?
