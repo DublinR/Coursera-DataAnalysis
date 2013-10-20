@@ -1,6 +1,6 @@
-# Week 8 Quiz
-
-## Question 1
+\section{Data Analysis : Week 8 Quiz}
+%--------------------------------------------------------------------%
+\subsection{Question 1}
 Suppose this is the result of 85 hypothesis tests:
 
 ![Question 1 Table](https://spark-public.s3.amazonaws.com/dataanalysis/quiz8q1.png)
@@ -14,7 +14,8 @@ false positives?
 **False discovery rate = 0.20 False positive rate = 0.09**  
 ~~False discovery rate = 0.33 False positive rate = 0.17~~
 
-## Question 2
+%--------------------------------------------------------------------%
+\subsection{Question 2}
 Generate P-values according to the following code:
 
 ```{r}
@@ -38,8 +39,8 @@ the false discovery rate at the alpha = 0.1 level as described in the lectures?
 ~~FWER = 3 FDR = 13~~  
 ~~FWER = 3 FDR = 5~~  
 ~~FWER = 32 FDR = 5~~
-
-## Question 3
+%--------------------------------------------------------------------%
+\subsection{Question 3}
 Suppose I want to generate data from the following model with a simulation:
 
 ```{r}
@@ -54,8 +55,8 @@ the following is not a step in the simulation process?
 ~~Generate the fitted values by adding yfit = 1 + 2*x + 3*z~~  
 ~~Generate a random sample of values for b_0, b_1, and b_2~~  
 **Generate y from a normal distribution, then subtract random variables e and add back b0 + b1*x + b2*z**
-
-## Question 4
+%--------------------------------------------------------------------%
+\subsection{Question 4}
 Suppose data are generated from a model:
 
 ```{r}
@@ -77,7 +78,8 @@ missing. Does the estimate of b1 change on average? If so how?
 ~~Case 1: b1 is overestimated Case 2: b1 is underestimated~~  
 ~~Case 1: b1 is underestimated Case 2: b1 is estimated correctly~~
 
-## Question 5
+%--------------------------------------------------------------------%
+\subsection{Question 5}
 Exactly as in the last question, suppose data are generated from a model:
 
 y = b0 + b1*x + e
