@@ -1,6 +1,7 @@
 # Week 4 Quiz
 
-## Question 1
+%--------------------------------------------------------------------%
+\subsection{Question 1}
 Load the movies data available from the course website here: 
 
 https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt
@@ -25,8 +26,8 @@ moviesLM$coefficients
 **The regression coefficient is 0.09676. The interpretation is that an increase
 of one million dollars in box office gross is associated with a 0.09676 increase
 in Rotten Tomatoes Score.**
-
-## Question 2
+%--------------------------------------------------------------------%
+\subsection{Question 2}
 
 Load the movies data available from the course website here: 
 
@@ -45,8 +46,8 @@ confint(moviesLM,level=0.9)
 **The 90% confidence interval for the intercept is (47.52, 52.63). If we
 repeated this study 100 times, we would expect our calculated interval to cover
 the true value on average 90% of the time.**
-
-## Question 3
+%--------------------------------------------------------------------%
+\subsection{Question 3}
 
 Load the movies data available from the course website here: 
 
@@ -69,8 +70,8 @@ moviesLM2$coefficients
 **The coefficient is 0.12752. That means that if two movies have the same box
 office gross, an increase of one minute in running time is associated with an
 average increase of 0.12752 in score.**
-
-## Question 4
+%--------------------------------------------------------------------%
+\subsection{Question 4}
 
 Load the movies data available from the course website here: 
 
@@ -100,8 +101,8 @@ summary(q4LM)
 ```
 **Yes running time is a confounder. It is correlated both with the Rotten
 Tomatoes score and the box office gross.**
-
-## Question 5
+%--------------------------------------------------------------------%
+\subsection{Question 5}
 
 Load the movies data available from the course website here: 
 
@@ -114,7 +115,7 @@ you do, remove those data points and refit the same regression (Rotten Tomatoes
 score is the outcome and box office gross and running time are the covariates).
 What do you observe?
 
-```{r}
+\begin{verbatim}
 # already have the data...
 # already have `moviesLM2`
 
@@ -131,12 +132,13 @@ lines(movies.shorter$running.time, moviesLM2b$fitted, col="red", lwd=3)
 
 summary(lmNoAdjust)
 # look for P-values
-```
+\end{verbatim}
+
 **Yes there are two outliers. After removing them and refitting the regression
 line, the running time coefficient has a larger magnitude and is more
 statistically significant.**
-
-## Question 6
+%--------------------------------------------------------------------%
+\subsection{Question 6}
 
 Load the movies data available from the course website here: 
 
@@ -156,8 +158,8 @@ summary(q6LM)
 as, or larger than, the one we saw, if there was no relationship between Rotten
 Tomatoes score and running time for a fixed box office gross.**
 
-
-## Question 7
+%--------------------------------------------------------------------%
+\subsection{Question 7}
 
 Load the movies data available from the course website here: 
 
@@ -168,13 +170,13 @@ and the covariates are movie rating, running time, and an interaction between
 running time and rating are the covariates. What is the coefficient for the
 interaction between running time and the indicator/dummy variable for PG rating?
 
-```{r}
+\begin{verbatim}
 # already have the data...
 moviesLMx <- lm(movies$score ~ movies$rating + movies$running.time + movies$running.time*movies$rating)
-```
+\end{verbatim}
 **The coefficient is -0.6901.**
-
-## Question 8
+%--------------------------------------------------------------------%
+\subsection{Question 8}
 
 Load the movies data available from the course website here: 
 
@@ -185,14 +187,15 @@ and the covariates are movie rating, running time, and an interaction between
 running time and rating are the covariates. What is the estimated average change
 in score for a PG movie for a one minute increase in running time?
 
-```{r}
+\begin{verbatim}
 # already have the data...
 q8LM <- lm(movies$score ~ movies$rating + movies$running.time + movies$running.time*movies$rating)
 ## (running.time coefficient + PG:running.time)
-```
+\end{verbatim}
 **0.4951**
+%--------------------------------------------------------------------%
 
-## Question 9
+\subsection{Question 9}
 
 Load the data on number of breaks during weaving into R with the command:
 
@@ -215,8 +218,8 @@ summary(warpLM)
 **LATER:** BLN says: go back to the "Regression with Factor Variables" lecture
 and zero in on "Question 2" ("What is the average difference in rating b/w PG-13
 and R-rated movies?") -- it's in there as `relevel`.
-
-## Question 10
+%--------------------------------------------------------------------%
+\subsection{Question 10}
 
 Based on this graph is there a significant association between organic food
 sales and autism rates? Would you believe this association could be used to
