@@ -1,20 +1,20 @@
 # Quiz 1
 %--------------------------------------------------------------------------%
 
-## Question 1
+\subsection*{Question 1}
 A web administrator is examining the web log file which provides information about people who visited his site. In the log file, the administrator sees a value for the internet protocol (IP) address of "127.0.0.1", a user ID of "frank" for the individual accessing the file and "2326", measured in bytes, for the size of the file returned to the user. Which of the following are true? Here is a description of a web log file in common log format: http://en.wikipedia.org/wiki/Common_Log_Format. Here is a description of an IP address: http://en.wikipedia.org/wiki/IP_address
 
 **The IP address and the user ID are qualitative variables and the number of bytes returned is quantitative.**
 %--------------------------------------------------------------------------%
 
-## Question 2
+\subsection*{Question 2}
 Suppose that random variable X follows a Poisson distribution with rate parameter L. If we increase the value of L, which of the following is true?
 
 ~~The center increases but the spread remains unchanged.~~
 **Both the spread and the center increase.**
 
 %--------------------------------------------------------------------------%
-\subsection{Question 3}
+\subsection*{Question 3}
 Run the following commands to create a data frame in R with measurements for 30 men describing their height in centimeters, weight in kilograms, and a logical indicator for whether they have a daughter or not.
 
 \begin{verbatim}
@@ -37,7 +37,7 @@ mean(dataFrameSubset$weightsK)set.seed(41)
 
 **82.40639**
 %--------------------------------------------------------------------------%
-\subsection{Question 4}
+\subsection*{Question 4}
 Run a command to generate 100 Cauchy random variables with default parameters and assign them to a vector cauchyValues immediately after running the command
 
 \begin{verbatim}
@@ -58,7 +58,7 @@ Note: It is critical that you run the set.seed commands immediately before the c
 **0.8084719, -1.1122863, 0.3716671**
 
 %--------------------------------------------------------------------------%
-\subsection{Question 5}
+\subsection*{Question 5}
 We take a random sample of individuals in a population and identify whether they smoke and if they have cancer. 
 We observe that there is a strong relationship between whether a person in the sample smoked or not and whether they have lung cancer. We claim that the smoking is related to lung cancer in the larger population.
 
