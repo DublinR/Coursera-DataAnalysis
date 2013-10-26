@@ -1,0 +1,29 @@
+Download a file from the web
+%---------------------------------------------------------------------------%
+\begin{verbatim}
+fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accessType=DOWNLOAD"
+download.file(fileUrl,destfile="./data/cameras.csv",method="curl")
+list.files("./data")
+[1] "camera.json" "camera.xlsx" "cameras.csv"
+[4] "cameras.rda" "camerasModified.csv"
+dateDownloaded <- date()
+dateDownloaded
+[1] "Sun Jan 27 12:21:15 2013"
+\end{verbatim}
+%---------------------------------------------------------------------------%
+
+Some notes about download.file()
+If the url starts with http you can use download.file()
+If the url starts with https on Windows you may be ok
+If the url starts with https on Mac you may need to set method="curl"
+If the file is big, this might take a while
+Be sure to record when you downloaded
+
+%---------------------------------------------------------------------------%
+\begin{verbatim}
+library(xlsx)
+fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.xlsx?accessType=DOWNLOAD"
+download.file(fileUrl,destfile="./data/camera.xlsx",method="curl")
+cameraData <- read.xlsx2("./data/camera.xlsx",sheetIndex=1)
+head(cameraData)
+\end{verbatim}
