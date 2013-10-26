@@ -1,0 +1,37 @@
+\section{Important simulation functions}
+\begin{itemize}
+\item Distributions
+\item Densities
+\item Sampling
+\end{itemize}
+%------------------------------------------------------%
+\subsection{Random Numbers}
+
+\begin{verbatim}
+rbeta, rbinom, rcauchy, rchisq, rexp, rf, rgamma, rgeom, rhyper, rlogis, rlnorm, rnbinom, rnorm,
+rpois, rt, runif, rweibull
+\end{verbatim}
+%------------------------------------------------------%
+\subsection{Density Functions}
+
+\begin{verbatim}
+dbeta,dbinom, dcauchy, dchisq, dexp, df, dgamma, dgeom, dhyper, dlogis, dlnorm, dnbinom,
+dnorm, dpois, dt, dunif, dweibull
+\end{verbatim}
+%------------------------------------------------------%
+\subsection{The sample function}
+
+\texttt{sample(,replace=TRUE),sample(replace=FALSE)}
+
+
+%------------------------------------------------------%
+\subsection{Setting a seed}
+Setting a seed ensures reproducible results from random processes in R
+\begin{verbatim}
+set.seed(12345)
+rnorm(5,mean=0,sd=1)
+[1] 0.5855 0.7095 -0.1093 -0.4535 0.6059
+set.seed(12345)
+rnorm(5,mean=0,sd=1)
+[1] 0.5855 0.7095 -0.1093 -0.4535 0.6059
+\end{verbatim}
