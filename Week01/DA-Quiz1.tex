@@ -1,0 +1,309 @@
+\documentclass[]{article}
+
+\usepackage{framed}
+\usepackage{amsmath}
+
+
+%opening
+\title{Data Analysis Week 1 Homework}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section*{Quiz 1}
+%--------------------------------------------------------------------------%
+
+\subsection*{Question 1}
+A web administrator is examining the web log file which provides information about people who visited his site. In the log file, the administrator sees 
+\begin{itemize}
+\item a value for the internet protocol (IP) address of ``127.0.0.1", \item a user ID of ``frank" for the individual accessing the file and \item ``2326", measured in bytes, for the size of the file returned to the user.
+\end{itemize} Which of the following are true? 
+
+\vspace{0.4cm}
+\noindent \textbf{Options:}
+\begin{enumerate}
+\item The IP address is a quantitative variable and the user ID and bytes returned are qualitative variables.
+\item The IP address and the user ID are qualitative variables and the number of bytes returned is quantitative.
+\item The IP address, user ID, and bytes returned are all qualitative variables.
+\item The IP address, user ID, and bytes returned are all quantitative variables.
+\end{enumerate}
+
+\vspace{0.2cm}
+\noindent \textbf{Required:}  Knowledge of quantitative and qualitative variables
+
+\begin{itemize}
+\item \textbf{Quantitative}  : Expression some numeric value, a count, a measure or a ranking
+\item \textbf{Qualitiative} : names, categories, descriptions, codes eg P.I.N and telephone numbers
+\end{itemize}
+
+
+{
+\small
+\noindent \textbf{Useful Sites}
+\begin{itemize}
+\item Here is a description of a web log file in common log format:
+\begin{verbatim}
+ http://en.wikipedia.org/wiki/Common_Log_Format. 
+\end{verbatim}
+\item Here is a description of an IP address:
+\begin{verbatim}
+http://en.wikipedia.org/wiki/IP_address
+\end{verbatim}
+\end{itemize}
+}
+% **The IP address and the user ID are qualitative variables and the number of bytes returned is quantitative.**
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 2}
+Suppose that random variable X follows a Poisson distribution with rate parameter \textbf{L}. If we increase the value of \texttt{L}, which of the following is true?
+
+
+\bigskip
+\noindent\textbf{Options:}
+\begin{enumerate}
+\item The spread increases but the center remains unchanged.
+\item Both the spread and the center increase.
+\item The center increases but the spread decreases.
+\item The spread increases but the center decreases.
+\end{enumerate}
+\vspace{0.5cm}
+\noindent \textbf{Comments:}
+\begin{itemize}
+\item center - i.e. the measures of centrality, such as mean and median.
+\item spread - i.e. measures of disperion, such as variance and range.
+\end{itemize} 
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise}
+\begin{itemize}
+\item Generate 100 random numbers from the Poisson distribution - specifying a value for \texttt{lambda} (i.e. what the rate parameter is called when using \texttt{R}) .
+\item Compute the mean and variance for this set of numbers.
+\item Repeat the process a few times, each time increasing the value of lambda.
+\end{itemize}
+\begin{framed}
+\begin{verbatim}
+#generate three data sets
+X1 <- rpois(100, lambda= 4)
+X2 <- rpois(100, lambda= 8)
+X3 <- rpois(100, lambda= 18)
+
+#Now get the mean and variance for each data set
+mean(X1);var(X1)
+mean(X2);var(X2)
+mean(X3);var(X3)
+\end{verbatim}
+\end{framed}
+
+% ~~The center increases but the spread remains unchanged.~~
+%**Both the spread and the center increase.**
+
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 3}
+Run the following commands to create a data frame in R with measurements for 30 men describing their height in centimeters, weight in kilograms, and a logical indicator for whether they have a daughter or not.
+
+\begin{framed}
+\begin{verbatim}
+set.seed(31)
+heightsCM <- rnorm(30,mean=188, sd=5)
+weightsK <- rnorm(30,mean=84,sd=3)
+hasDaughter <- sample(c(TRUE,FALSE),size=30,replace=T) 
+dataFrame <- data.frame(heightsCM,weightsK,hasDaughter)
+\end{verbatim}
+\end{framed}
+\begin{itemize}
+\item Subset the data frame to only the individuals that are greater than 188 centimeters tall. 
+
+\item Assign this subset to a data frame called \textit{\textbf{dataFrameSubset}}. 
+Then run the following command to get the average weight among this subset of men in the data. 
+\end{itemize}
+\begin{framed}
+\begin{verbatim}
+mean(dataFrameSubset$weightsK)
+\end{verbatim}
+\end{framed} 
+What is the value that is produced?
+
+\begin{framed}
+\begin{verbatim}
+dataFrameSubset <- subset(dataFrame, heightsCM > 188)
+mean(dataFrameSubset$weightsK)
+\end{verbatim}
+\end{framed}
+%**82.40639**
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 4}
+
+
+Run a command to generate 100 Cauchy random variables with default parameters and assign them to a vector \textit{\textbf{cauchyValues}} immediately after running the command
+
+\begin{framed}
+\begin{verbatim}
+set.seed(41)
+cauchyValues <- rcauchy(100)
+\end{verbatim}
+\end{framed}
+
+\noindent Then run a command to sample 10 values with replacement from \textit{\textbf{cauchyValues}} immediately after running the command.
+
+\noindent \textit{\textbf{Note}: It is critical that you run the \texttt{set.seed()} commands immediately before the commands to perform the data generation and sampling or you will get the wrong answer.}
+
+\begin{framed}
+\begin{verbatim}
+#Run together - not separately
+set.seed(415)
+sample(cauchyValues, 10, replace=TRUE)
+\end{verbatim}
+\end{framed}
+
+\noindent What are the first three values of the resulting sample?
+ 
+
+
+%**0.8084719, -1.1122863, 0.3716671**
+\subsubsection*{The Cauchy Distribution : Uses}
+(Source: \textit{\textbf{http://www.vosesoftware.com/ModelRiskHelp}})\\
+(\textit{Side Panel - Click on ``more", ``distribution" and then ``list of distributions.})
+\\
+\vspace{0.5cm}
+The Cauchy distribution  is used in mechanical and electrical theory, physical anthropology and measurement and calibration problems. In physics it is usually called a Lorentzian distribution, where it is the distribution of the energy of an unstable state in quantum mechanics. It is also used to model the points of impact of a fixed straight line of particles emitted from a point source.
+
+%--------------------------------------------------------------------------%
+%Ready
+\newpage
+\subsection*{Question 5}
+\begin{itemize}
+\item We take a random sample of individuals in a population and identify whether they smoke and if they have cancer. 
+\item We observe that there is a strong relationship between whether a person in the sample smoked or not and whether they have lung cancer.
+\item  We claim that the smoking is related to lung cancer in the larger population.
+\end{itemize}
+%**This is an example of an inferential data analysis.**
+
+\noindent \textbf{Options}
+\begin{enumerate}
+\item This is an example of a mechanistic data analysis.
+\item This is an example of an inferential data analysis.
+\item This is an example of an descriptive data analysis.
+\item This is an example of a predictive data analysis.
+\end{enumerate}
+
+\noindent \textbf{Comments}
+\begin{itemize}
+\item Inferential data analysis related to making statements about a population based on statistics computed from representative samples.
+
+\item There is such a thing as ``\textit{\textbf{exploratory data analysis}}" - which is essentially a collation of descriptive statistics and summary graphic to inform end users about a sample. \\ Importantly - suggesting hypotheses about a population is not part of this process.
+
+\item A predictive model is specifically about future events, predicted from currently available data. Making a statement about something currently happening is not predictive - but rather retrospectivally looking at contributing factors.
+
+\item Mechanistic?  Causal? - never heard of those.
+\end{itemize}
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 6}
+%READY
+Suppose that we collect data on every goal scored in the Spanish Primera Division in the 2011/2012 and 2012/2013 seasons. (Source: \texttt{http://soccernet.espn.go.com})
+
+\begin{itemize}
+\item We use the data from 2011/2012 to build a model to predict the number of goals scored in 2012/2013.
+\item What is the complete list of labels that apply to this data set?
+\end{itemize} 
+
+%**Census, prediction, longitudinal**
+\textbf{Options}
+\begin{enumerate}
+\item Prediction and cross-sectional
+\item Prediction, inferential, and longitudinal
+\item Only prediction
+\item Census, prediction, longitudinal
+\end{enumerate}
+
+\textbf{Comments}
+\begin{itemize}
+\item Census - ``......data on \textbf{every} goal scored.."
+\item Prediction - ``........ \textbf{predict} the number.."
+\item Prediction and Inferential - very different purposes. 
+\item Defining characteristic of \textbf{cross sectional studies} are that they take place at a single point in time.
+\item Defining characteristic of \textbf{longtitudinal studies} are that they take place over multiple periods of time, collecting data at every period.
+\end{itemize}
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 7}
+%READY
+What are the three characteristics of tidy data?
+
+\begin{itemize}
+\item ``\textit{\textbf{Tidy data}}" by Hadley Wickham (RStudio)
+\item Submission to Journal of Statistical Software
+\item (http://vita.had.co.nz/papers/tidy-data.pdf)
+\end{itemize}
+Three Principles from Hadley Wickham's paper
+\begin{itemize}
+\item[1.] Each variable forms a column, 
+\item[2.] Each observation forms a row, 
+\item[3.] Each table/file stores data about one kind of observation.
+\end{itemize}
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 8}
+%READY
+Which of the following are components of data processing that should be recorded for use in later data analyses?
+
+% **All of the above**
+\bigskip
+\textbf{Options}
+
+\begin{enumerate}
+%\item Which of the following are components of data processing that should be recorded for use in later data analyses?
+\item Which data files were merged together to create the processed data (\textbf{\textit{sensible}})
+\item What day the data were downloaded from a website (\textbf{\textit{sensible}})
+\item The software used to process the raw data. (\textbf{\textit{sensible}})
+\item All of the above (!!)
+\end{enumerate}
+%--------------------------------------------------------------------------%
+%Ready
+\newpage
+\subsection*{Question 9}
+When writing about data, what does it mean when we write: \[ X | Y = y\]
+
+\begin{itemize}
+\item $X$ and $Y$ are random variables. Random variables are conventionally denoted with capital letters. Small letters conventionally denote the location in the equation for specific values.
+(i.e. X : Height , x = 1.82 meters )
+\item Suppose $X$ was height and $Y$ was weight. Also let us suppose that $y$ is 14 stone.
+\item We might understand the expression as \textbf{\emph{Heights of people who weigh 14 stone}}?
+\item The likely distribution of heights would be different from people who are 10 stone for example.
+\item That is to say - the distribution of X depends on the value of Y. The converse case  $Y | X = x$ can also be true.
+\end{itemize}
+
+%**We are referring to the random variable X when we know the random variable Y has value y. 
+%The distribution of this variable may be different than the distribution of the variable X when Y is also random.**
+%--------------------------------------------------------------------------%
+\newpage
+\subsection*{Question 10}
+%READY
+\begin{itemize}
+\item Suppose we take a sample of people in Baltimore and observe that younger people have taken more Coursera courses. 
+\item We use an inferential data analysis to show a relationship between age and Coursera courses. 
+\item Which of the following statements are true based only on our analysis?
+\end{itemize}
+\noindent \textbf{Options}
+\begin{enumerate}
+\item The reason that younger people take more Coursera courses is that they understand technology better. \\(\textit{\textbf{Speculative Generalization - can't do this} : Nothing in study about general use of technology.})			
+\item If we took a census of all people in Baltimore, we would expect to see that the younger a person was, the more likely they were to have taken a Coursera course.		
+\item When comparing two people in Baltimore, the one who is younger will always have taken more Coursera courses. (\textbf{\textit{Ecological Fallacy}})			
+\item If we took a census of all people in \textbf{Boston}, we would expect to see that the younger a person was, the more likely
+ they were to have taken a Coursera course.(\textbf{\textit{Wrong Town - study not performed in Boston}})
+\end{enumerate}
+\vspace{0.5cm}
+\noindent \textbf{The Ecological Fallacy}\\
+The Ecological Fallacy is a situation that can occur when a researcher or analyst makes an inference about particular individuals based on aggregate data for a group. 
+(Source: \textit{http://jratcliffe.net/research/ecolfallacy.htm})
+
+\bigskip
+(Also check out ``\textit{\textbf{Simpson's paradox}}".)
+%**If we took a census of all people in Baltimore, we would expect to see that the younger a person was, the more likely they were to have taken a Coursera course.**
+\end{document}
