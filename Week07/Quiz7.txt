@@ -1,6 +1,6 @@
-# Week 7 Quiz
+\section*{Week 7 Quiz}
 %-------------------------------------------------------------------------%
-\subsection{Question 1}
+\subsection*{Question 1}
 
 When the span parameter increases in a loess fit which of the following is true
 (pick one)?
@@ -8,7 +8,7 @@ When the span parameter increases in a loess fit which of the following is true
 **The fit gets more smooth and the bias increases.**
 
 %-------------------------------------------------------------------------%
-\subsection{Question 2}
+\subsection*{Question 2}
 
 Define a data set according to the code
 
@@ -25,7 +25,7 @@ squared error (RMSE) between the fitted values and the observed `yValues` (the
 `rmse()` function in R may help). At what number of degrees of freedom is there
 the most dramatic drop in the RMSE? Why does this make sense?
 
-```{r}
+\begin{verbatim}
 library(splines)
 lmQ2.1  <- lm(yValues ~ ns(xValues, df=1))
 lmQ2.2  <- lm(yValues ~ ns(xValues, df=2))
@@ -52,12 +52,13 @@ all.rmse.s <- c(rmse(yValues, predict(lmQ2.1,data=yValues)),
                 rmse(yValues, predict(lmQ2.8,data=yValues)),
                 rmse(yValues, predict(lmQ2.9,data=yValues)),
                 rmse(yValues, predict(lmQ2.10,data=yValues)))
-```
+\end{verbatim}
 
 **The RMSE drops between df=2 and df=3. This is because the sinusoidal model has one inflection points - like a cubic function.**
 
 %-------------------------------------------------------------------------%
-\subsection{Question 3}
+\newpage
+\subsection*{Question 3}
 
 Load the `simpleboot` package (you may have to install it first) with the
 following commands:
@@ -82,13 +83,14 @@ sd(obQ3$t) # 0.5965868
 **The 75th percentile is: 11.5 The bootstrap s.d. is: 0.5965868**
 
 %-------------------------------------------------------------------------%
-\subsection{Question 4}
+\newpage
+\subsection*{Question 4}
 
 Load the Cars93 data:
 
-```{r}
+\begin{verbatim}
 data(Cars93,package="MASS")
-```
+\end{verbatim}
 
 Set the seed to 7363 and calculate three trees using the `tree()` function on
 bootstrapped samples (samples with replacement). Each tree should treat the
@@ -126,20 +128,24 @@ combined <- (p1/3 + p2/3 + p3/3)
 
 Load the vowel.train and vowel.test data sets:
 
+\begin{framed}
 \begin{verbatim}
 library(ElemStatLearn)
 data(vowel.train)
 data(vowel.test)
 \end{verbatim}
-
-Set the variable `y` to be a factor variable in both the training and test set.
-Then set the seed to 33833. Fit (1) a random forest predictor relating the
+\end{framed}
+\begin{itemize}
+\item Set the variable `y` to be a factor variable in both the training and test set.
+Then set the seed to 33833. \item Fit (1) a random forest predictor relating the
 factor variable `y` to the remaining variables and (2) an `svm` predictor using
-the `svm()` function in the `e1071` package. What are the error rates for the
-two approaches on the test data set? What is the error rate when the two methods
+the `svm()` function in the `e1071` package. \item What are the error rates for the
+two approaches on the test data set? \item What is the error rate when the two methods
 agree on a prediction?
-
-```{r}
+\end{itemize}
+%-----------------%
+\begin{framed}
+\begin{verbatim}
 library(randomForest)
 library(e1071)
 vowel.train$y <- as.factor(vowel.train$y)
@@ -149,8 +155,9 @@ setseed(33833)
 
 rfQ5  <- randomForest(y ~ ., data=vowel.train)
 svmQ5 <- svm(y ~ ., data=vowel.train)
+\end{verbatim}
+\end{framed}
 
-# fuck it... going to guess
-```
 
-**Test error random forest = 0.4199134 Test error svm = 0.3874459 Test error both agree = 0.2823129**
+% **Test error random forest = 0.4199134 Test error svm = 0.3874459 Test error both agree = 0.2823129**
+%---------------------------------------------------------------------------%
