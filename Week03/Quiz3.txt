@@ -1,4 +1,4 @@
-# Week 3 Quiz
+\section{Week 3 Quiz}
 
 %-----------------------------------------------------------------%
 \subsection{Question 1}
@@ -22,7 +22,8 @@ make this an exploratory graph? Check all correct options.
 + **The plot does not report the units on the axis labels.**
 
 %-----------------------------------------------------------------%
-\subsection{Question 2~
+\newpage
+\subsection{Question 2}
 Below is a boxplot of yearly income by marital status for individuals in the
 United States. It was created using the following code in R:
 
@@ -44,6 +45,7 @@ Which of the following can you conclude from the plot? (Check all that apply)
 + **The 75th percentile of the income for widowed individuals is almost the same as the 75th percentile for never married individuals..**
 
 %-----------------------------------------------------------------%
+\newpage
 \subsection{Question 3}
 Load the iris data into R using the following commands:
 
@@ -72,6 +74,7 @@ rect.hclust(hclust(dist(irisSubset)), h=3)
 **4 clusters**
 
 %-----------------------------------------------------------------%
+\newpage
 \subsection{Question 4}
 
 Load the following data set into R using either the .rda or .csv file: 
