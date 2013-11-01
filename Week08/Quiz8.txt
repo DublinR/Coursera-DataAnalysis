@@ -1,7 +1,19 @@
 \section{Data Analysis : Week 8 Quiz}
+%--------------------------------------------------------------------%
 
 % False positive rate
 % MCPs / FWER / FDR /
+
+% http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf
+Why Multiple Testing Matters
+In general, if we perform m hypothesis tests, what isthe
+probability of at least 1 false positive?
+\begin{itemize}
+\item P(Making an error) = $\alpha
+\item (Not making an error) = $1 - \alpha
+\item (Not making an error in m tests) = $(1 - \alpha)^m$
+\item (Making at least 1 error in m tests) = $1 - (1 - \alpha)^m$
+\end{itemize}
 
 %--------------------------------------------------------------------%
 
