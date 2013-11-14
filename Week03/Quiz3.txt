@@ -29,6 +29,12 @@ make this an exploratory graph? Check all correct options.
 - The plot is made in R.
 - The plot uses color to make the figure "pretty"
 + **The plot does not report the units on the axis labels.**
+%-----------------------
+% The plot is made in R.	Incorrect	0.00	
+% There plot does not have a legend.	Correct	1.00	
+% The plot is a scatterplot.	Incorrect	0.00	
+% The plot does not report the units on the axis labels.	Correct	1.00	
+
 
 %-----------------------------------------------------------------%
 \newpage
