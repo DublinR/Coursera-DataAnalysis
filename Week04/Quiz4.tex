@@ -169,14 +169,17 @@ https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt
 
 Fit a linear model by least squares where Rotten Tomatoes score is the outcome
 and the covariates are movie rating, running time, and an interaction between
-running time and rating are the covariates. What is the coefficient for the
+running time and rating are the covariates. 
+
+What is the coefficient for the
 interaction between running time and the indicator/dummy variable for PG rating?
 
 \begin{verbatim}
 # already have the data...
-moviesLMx <- lm(movies$score ~ movies$rating + movies$running.time + movies$running.time*movies$rating)
+moviesLMx <- lm(movies$score ~ movies$rating + 
+  movies$running.time + movies$running.time*movies$rating)
 \end{verbatim}
-**The coefficient is -0.6901.**
+% **The coefficient is -0.6901.**
 %--------------------------------------------------------------------%
 \subsection{Question 8}
 
@@ -186,7 +189,9 @@ https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt
 
 Fit a linear model by least squares where Rotten Tomatoes score is the outcome
 and the covariates are movie rating, running time, and an interaction between
-running time and rating are the covariates. What is the estimated average change
+running time and rating are the covariates. 
+
+What is the estimated average change
 in score for a PG movie for a one minute increase in running time?
 
 \begin{verbatim}
@@ -197,31 +202,32 @@ q8LM <- lm(movies$score ~ movies$rating + movies$running.time + movies$running.t
 **0.4951**
 %--------------------------------------------------------------------%
 
-\subsection{Question 9}
+\subsection8{Question 9}
 
 Load the data on number of breaks during weaving into R with the command:
 
-```{r}
+\begin{verbatim}
 data(warpbreaks)
-```
+\end{verbatim}
 
 Fit a linear model where the outcome is the number of breaks and the covariate
 is tension. What is a 95% confidence interval for the average difference in
 number of breaks between medium and high tension?
 
-```{r}
+\begin{verbatim}
 warpLM <- lm (warpbreaks$breaks ~ warpbreaks$tension)
 confint(warpLM, level=0.95)
 summary(warpLM)
-```
-**(-3.23, 12.67)**
-(though I'll admit I don't know how I got here...)
+\end{verbatim}
+
+%**(-3.23, 12.67)**
+%(though I'll admit I don't know how I got here...)
 
 **LATER:** BLN says: go back to the "Regression with Factor Variables" lecture
 and zero in on "Question 2" ("What is the average difference in rating b/w PG-13
 and R-rated movies?") -- it's in there as `relevel`.
 %--------------------------------------------------------------------%
-\subsection{Question 10}
+\subsection*{Question 10}
 
 Based on this graph is there a significant association between organic food
 sales and autism rates? Would you believe this association could be used to
