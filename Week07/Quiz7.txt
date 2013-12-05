@@ -1,30 +1,61 @@
-\section*{Week 7 Quiz}
+\documentclass[12pt]{article}
+
+%opening
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\begin{document}
+
+
+\section{Data Analysis Week 7 Quiz}
+\begin{itemize}
+\item Part 1 : Smoothing        
+\item Part 2 : Bootstrap        
+\item Part 3 : Bootstrap Prediction        
+\item Part 4 : Combining Predictors
+\end{itemize}
 %-------------------------------------------------------------------------%
 \subsection*{Question 1}
 
-When the span parameter increases in a loess fit which of the following is true
+When the span parameter increases in a \textit{\textbf{loess}} fit which of the following is true
 (pick one)?
 
-**The fit gets more smooth and the bias increases.**
+\begin{itemize}
+\item The fit gets more smooth and the bias increases.
+\end{itemize}
 
+\newpage
+%-------------------------------------------------------------------------%
+\subsection*{Useful \texttt{R} Commands}
+\begin{itemize}
+\item \texttt{ns()} - Generate a Basis Matrix for Natural Cubic Splines
+\item \texttt{install\_github()} - Install a package from GitHub (using the \textit{\textbf{devtools}} package)
+\end{itemize}
 %-------------------------------------------------------------------------%
 \subsection*{Question 2}
 
 Define a data set according to the code
 
-```{r}
+\begin{framed}
+\begin{verbatim}
 set.seed(53535)
 xValues = seq(0,2*pi,length=100)
 yValues = rnorm(100) + sin(xValues)
-```
+\end{verbatim}
+\end{framed}
 
-Fit linear models with the `yValues` as outcome and a natural cubic spline model
-for the `xValues` as the covariates. Fit the model with degrees of freedom equal
-to each integer between 1 and 10. For each model, calculate the root mean
-squared error (RMSE) between the fitted values and the observed `yValues` (the
-`rmse()` function in R may help). At what number of degrees of freedom is there
+Fit linear models with the `\textbf{yValues}` as outcome and a natural cubic spline model
+for the `\textbf{xValues}` as the covariates. Fit the model with degrees of freedom equal
+to each integer between 1 and 10. 
+
+
+\noindent For each model, calculate the root mean
+squared error (RMSE) between the fitted values and the observed `\textbf{yValues}` (the
+`\texttt{rmse()}` function in \texttt{R} may help). At what number of degrees of freedom is there
 the most dramatic drop in the RMSE? Why does this make sense?
 
+\begin{framed}
 \begin{verbatim}
 library(splines)
 lmQ2.1  <- lm(yValues ~ ns(xValues, df=1))
@@ -41,7 +72,10 @@ lmQ2.10 <- lm(yValues ~ ns(xValues, df=10))
 library("devtools")
 install_github("medley", "mewo2") 
 library(medley)
-
+\end{verbatim}
+\end{framed}
+\begin{framed}
+\begin{verbatim}
 all.rmse.s <- c(rmse(yValues, predict(lmQ2.1,data=yValues)),
                 rmse(yValues, predict(lmQ2.2,data=yValues)),
                 rmse(yValues, predict(lmQ2.3,data=yValues)),
@@ -53,32 +87,37 @@ all.rmse.s <- c(rmse(yValues, predict(lmQ2.1,data=yValues)),
                 rmse(yValues, predict(lmQ2.9,data=yValues)),
                 rmse(yValues, predict(lmQ2.10,data=yValues)))
 \end{verbatim}
-
-**The RMSE drops between df=2 and df=3. This is because the sinusoidal model has one inflection points - like a cubic function.**
+\end{framed}
+The RMSE drops between df=2 and df=3. This is because the sinusoidal model has one inflection points - like a cubic function.
 
 %-------------------------------------------------------------------------%
 \newpage
 \subsection*{Question 3}
 
-Load the `simpleboot` package (you may have to install it first) with the
+Load the `\textbf{simpleboot}` package (you may have to install it first) with the
 following commands:
 
+\begin{framed}
 \begin{verbatim}
 library(simpleboot) 
 data(airquality)
 attach(airquality)
 \end{verbatim}
+\end{framed}
 
 Calculate the 75th percentile of the `Wind` variable. Then set the seed to
-883833 and use the `one.boot` function with 1,000 replications to calculate the
+883833 and use the `\texttt{one.boot}` function with 1,000 replications to calculate the
 bootstrap standard error of the 75th percentile of the `Wind` variable.
 
+\begin{framed}
 \begin{verbatim}
 quantile(airquality$Wind, .75)[[1]] ## 11.5
 set.seed(883833)
-obQ3 <- one.boot(airquality$Wind, function(x, inds) quantile(x, .75)[[1]], R=1000)
+obQ3 <- one.boot(airquality$Wind, 
+  function(x, inds) quantile(x, .75)[[1]], R=1000)
 sd(obQ3$t) # 0.5965868
 \end{verbatim}
+\end{framed}
 
 **The 75th percentile is: 11.5 The bootstrap s.d. is: 0.5965868**
 
@@ -86,20 +125,24 @@ sd(obQ3$t) # 0.5965868
 \newpage
 \subsection*{Question 4}
 
-Load the Cars93 data:
+Load the \textit{\textbf{Cars93}} data:
 
+\begin{framed}
 \begin{verbatim}
 data(Cars93,package="MASS")
 \end{verbatim}
+\end{framed}
 
-Set the seed to 7363 and calculate three trees using the `tree()` function on
+Set the seed to 7363 and calculate three trees using the `\texttt{tree()}` function on
 bootstrapped samples (samples with replacement). Each tree should treat the
 `DriveTrain` variable as the outcome and `Price` and `Type` as covariates.
 Predict the value of the following data frame
 
+\begin{framed}
 \begin{verbatim}
 newdata = data.frame(Type = "Large",Price = 20)
 \end{verbatim}
+\end{framed}
 
 with each tree and report the majority vote winner along with the percentage of
 votes among the three trees for that value.
@@ -109,6 +152,7 @@ set.seed(7363)
 sample1 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
 sample2 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
 sample3 <- Cars93[sample(nrow(Cars93), replace=TRUE),]
+
 tree1Q4 <- tree(DriveTrain ~ Price + Type, data=sample1)
 tree2Q4 <- tree(DriveTrain ~ Price + Type, data=sample2)
 tree3Q4 <- tree(DriveTrain ~ Price + Type, data=sample3)
@@ -118,13 +162,13 @@ p2 <- predict(tree2Q4, data=newdata, type="class")
 p3 <- predict(tree3Q4, data=newdata, type="class")
 
 combined <- (p1/3 + p2/3 + p3/3)
-# only that doesn't work for factors...
+
 \end{verbatim}
 
-~~Front Percent of Votes = 66%~~
-**Front Percent of Votes = 100%**
+%Front Percent of Votes = 66%~~
+TFront Percent of Votes = 100%**
 %-------------------------------------------------------------------------%
-\subsection{Question 5}
+\subsection*{Question 5}
 
 Load the vowel.train and vowel.test data sets:
 
@@ -139,7 +183,7 @@ data(vowel.test)
 \item Set the variable `y` to be a factor variable in both the training and test set.
 Then set the seed to 33833. \item Fit (1) a random forest predictor relating the
 factor variable `y` to the remaining variables and (2) an `svm` predictor using
-the `svm()` function in the `e1071` package. \item What are the error rates for the
+the `\texttt{svm()}` function in the `\\textit{textbf{e1071}}` package. \item What are the error rates for the
 two approaches on the test data set? \item What is the error rate when the two methods
 agree on a prediction?
 \end{itemize}
@@ -161,3 +205,4 @@ svmQ5 <- svm(y ~ ., data=vowel.train)
 
 % **Test error random forest = 0.4199134 Test error svm = 0.3874459 Test error both agree = 0.2823129**
 %---------------------------------------------------------------------------%
+\end{document}
