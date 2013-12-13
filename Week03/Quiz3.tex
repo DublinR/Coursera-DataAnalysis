@@ -105,12 +105,9 @@ result?
 
 \begin{framed}
 \begin{verbatim}
+irisSub <- iris[,1:4]
+plot(hclust(dist(irisSub)))
 
-## SHOW YOUR WORK:
-irisSubset <- iris[,1:4]
-plot(hclust(dist(irisSubset)))
-
-## Suggestion
 rect.hclust(hclust(dist(irisSubset)), h=3)
 \end{verbatim}
 \end{framed}
