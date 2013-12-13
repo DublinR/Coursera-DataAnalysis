@@ -1,4 +1,23 @@
 # Week 6 Quiz
+###Question 3####
+library(ElemStatLearn)
+data(SAheart)
+set.seed(8484)
+train = sample(1:dim(SAheart)[1],size=dim(SAheart)[1]/2,replace=F)
+trainSA = SAheart[train,]
+testSA = SAheart[-train,]
+
+trainOutcome <- lm(chd ~ age + alcohol + obesity + tobacco + typea + ldl, data=trainSA)
+fittedTrain <- predict(trainOutcome, newdata = trainSA, type = 'response')
+fittedTest <- predict(trainOutcome, newdata = testSA, type = 'response')
+
+sqrt(sum((trainOutcome$fitted-testSA$chd)^2))
+sqrt(sum((predict(trainOutcome,newdata=testSA)-testSA$chd)^2))
+
+missClass = function(values,prediction){sum(((prediction > 0.5)*1) != values)/length(values)}
+
+missClass(trainSA$chd, fittedTrain)
+missClass(testSA$chd, fittedTest)
 
 ## Question 1
 
