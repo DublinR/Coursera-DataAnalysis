@@ -1,3 +1,5 @@
+
+#########################################################################
 ###Question 2####
 set.seed(53535)
 xValues = seq(0,2*pi,length=100)
@@ -22,6 +24,7 @@ lapply(1:10, function(i){
      rmse(yValues, lm(yValues ~ (ns(xValues, df = i)))$fitted)
 } )
 
+#########################################################################
 ###Question 3####
 
 library(simpleboot) 
@@ -31,12 +34,12 @@ summary(Wind)
 set.seed(883833)
 quantile(Wind, 0.75)
 
-myfun <- function(x) quantile(x, 0.75)
-boot.output <- one.boot(Wind, myfun, R=1000)
+Func <- function(x) quantile(x, 0.75)
+boot.output <- one.boot(Wind, Func, R=1000)
 names(boot.output)
 apply(boot.output$t, 2, sd)
 ?apply
-
+#########################################################################
 ###Question 4####
 data(Cars93,package="MASS")
 set.seed(7363)
@@ -49,7 +52,7 @@ summary(predict(tree.output2, data=newdata, type="class"))
 summary(predict(tree.output3, data=newdata, type="class"))
 plot(tree.output1)
 text(tree.output1)
-
+#########################################################################
 ###Question 5####
 library(ElemStatLearn)
 library(randomForest)
