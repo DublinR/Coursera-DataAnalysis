@@ -1,11 +1,12 @@
-\documentclass[]{article}
-
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{framed}
 \begin{document}
 
-\maketitle
+%\maketitle
 
-\section{Week 3 Quiz}
+\section*{Week 3 Quiz}
 
 %-----------------------------------------------------------------%
 \subsection*{Question 1}
@@ -16,19 +17,28 @@ code in \texttt{R}:
 \begin{verbatim}
 library(ElemStatLearn)
 data(bone)
-plot(bone$age,bone$spnbmd,pch=19,col=((bone$gender=="male")+1))
+plot(bone$age,bone$spnbmd,pch=19,
+ col=((bone$gender=="male")+1))
 \end{verbatim}
 \end{framed}
 
-Males are shown in black and females in red. What are the characteristics that
-make this an exploratory graph? Check all correct options.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{./DAquiz3Graph1.jpeg}
+%\caption{}
+%\label{fig:DAquiz3Graph1}
+\end{figure}
 
-+ **There plot does not have a legend.**
-+ **The axis labels are R variables**
-- The plot uses filled in circles.
-- The plot is made in R.
-- The plot uses color to make the figure "pretty"
-+ **The plot does not report the units on the axis labels.**
+\noindent Males are shown in black and females in red. What are the characteristics that make this an exploratory graph? Check all correct options.
+
+\begin{itemize}
+\item[(i)] The plot does not have a legend.
+\item[(ii)] The axis labels are \texttt{R} variables
+\item[(iii)] The plot uses filled in circles. \textit{(Plot character is arbitrary choice)}
+\item[(iv)] The plot is made in \texttt{R}. \textit{(Can make plots in other environments)}
+	\item[(v)] The plot uses color to make the figure ``pretty" \textit{(Nice but not necessary)}
+\item[(vi)] The plot does not report the units on the axis labels.
+\end{itemize}
 %-----------------------
 % The plot is made in R.	Incorrect	0.00	
 % There plot does not have a legend.	Correct	1.00	
@@ -37,8 +47,8 @@ make this an exploratory graph? Check all correct options.
 
 
 %-----------------------------------------------------------------%
-\newpage
-\subsection{Question 2}
+
+\subsection*{Question 2}
 Below is a boxplot of yearly income by marital status for individuals in the
 United States. It was created using the following code in \texttt{R}:
 
@@ -46,36 +56,54 @@ United States. It was created using the following code in \texttt{R}:
 \begin{verbatim}
 library(ElemStatLearn)
 data(marketing)
-plot(bone$age,bone$spnbmd,pch=19,col=((bone$gender=="male")+1))
-boxplot(marketing$Income ~ marketing$Marital,col="grey",xaxt="n",ylab="Income",xlab="")
-axis(side=1,at=1:5,labels=c("Married","Living together/not married","Divorced or separated","Widowed","Nevermarried"),las=2)
+
+plot(bone$age,bone$spnbmd,pch=19,
+ col=((bone$gender=="male")+1))
+ 
+boxplot(marketing$Income ~marketing$Marital,
+ col="grey",xaxt="n",ylab="Income",xlab="")
+
+axis(side=1,at=1:5,
+ labels=c("Married","Living together/not married",
+ "Divorced or separated","Widowed","Nevermarried")
+ ,las=2)
 \end{verbatim}
 \end{framed}
+\newpage
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.1\linewidth]{./DAquiz3Graph2}
+\caption{}
+\label{fig:DAquiz3Graph1}
+\end{figure}
 
+\noindent Which of the following can you conclude from the plot? (Check all that apply)
 
-Which of the following can you conclude from the plot? (Check all that apply)
-
-+ **There are more individuals who were never married than divorced in this data set.**
-- The 75th percentile of the income for individuals who were widowed is almost the same as the 75th percentile for individuals who were married.
-- There are more individuals who are widowed than divorced in this data set.
-+ **The median income for individuals who are divorced is higher than the median for individuals who are widowed.**
-+ **The 75th percentile of the income for widowed individuals is almost the same as the 75th percentile for never married individuals..**
-
+\begin{itemize}
+\item[(i)] There are more individuals who were never married than divorced in this data set. 
+\item[(ii)] The 75th percentile of the income for individuals who were widowed is almost the same as the 75th percentile for individuals who were married.
+\item[(iii)] There are more individuals who are widowed than divorced in this data set.
+\item[(iv)] The median income for individuals who are divorced is higher than the median for individuals who are widowed.
+\item[(v)] The 75th percentile of the income for widowed individuals is almost the same as the 75th percentile for never married individuals..
+\end{itemize}
 %-----------------------------------------------------------------%
 \newpage
 \subsection*{Question 3}
 Load the \textbf{iris} data into \texttt{R} using the following commands:
 
+\begin{framed}
 \begin{verbatim}
 library(datasets)
 data(iris)
 \end{verbatim}
+\end{framed}
 
 Subset the `\textbf{iris}` data to the first four columns and call this matrix
 `\textit{irisSubset}`. Apply hierarchical clustering to the irisSubset data frame to
 cluster the rows. If I cut the dendrogram at a height of 3 how many clusters
 result?
 
+\begin{framed}
 \begin{verbatim}
 
 ## SHOW YOUR WORK:
@@ -85,7 +113,13 @@ plot(hclust(dist(irisSubset)))
 ## Suggestion
 rect.hclust(hclust(dist(irisSubset)), h=3)
 \end{verbatim}
-
+\end{framed}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{./DAquiz3Graph3}
+\caption{}
+\label{fig:DAquiz3Graph2}
+\end{figure}
 
 % **4 clusters**
 
@@ -106,28 +140,65 @@ appear in. Is there anything wrong with the resulting cluster estimates?
 
 \begin{framed}
 \begin{verbatim}
-## SHOW YOUR WORK:
-# setwd("~/Desktop/coursera-data-analysis/quizzes")
-download.file('https://spark-public.s3.amazonaws.com/dataanalysis/quiz3question4.csv',
-              "quiz3question4.csv", method="curl")
+#Download file and save it to your working directory.
+#
 q3q4.data <- read.csv("quiz3question4.csv", header=TRUE)
 q3q4.scatter <- plot(q3q4.data$x, q3q4.data$y)
 \end{verbatim}
 \end{framed}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{./DAquiz3Graph4a}
+\caption{}
+\label{fig:DAquiz3Graph4a}
+\end{figure}
+
 %# How many clusters do you observe?
 %# ~~4?~~ **2**
-
+\begin{framed}
 \begin{verbatim}
-# Perform k-means clustering...
-kmeansObj <- kmeans(q3q4.data, centers=2)
-plot(q3q4.data$x, q3q4.data$y, col=kmeansObj$cluster, pch=19, cex=2)
+# Perform k-means clustering
+kmeansObj <- kmeans(q3q4.data[,c(2,3)], centers=2)
+plot(q3q4.data$x, q3q4.data$y, 
+    col=kmeansObj$cluster, pch=19, cex=2)
 \end{verbatim}
+\end{framed}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./DAquiz3Graph4b}
+\caption{}
+\label{What it should look like}
+\end{figure}
 
-~~There are two obvious clusters. The k-means algorithm correctly assigns all points to the two obvious clusters.~~
-**There are two obvious clusters. The k-means algorithm does not assign all of the points to the correct clusters because the clusters wrap around each other.**
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./DAquiz3Graph4b}
+\caption{}
+\label{What it should look like}
+\end{figure}
+
+%~~There are two obvious clusters. The k-means algorithm correctly assigns all points to the two obvious clusters.~~
+%**There are two obvious clusters. The k-means algorithm does not assign all of the points to the correct clusters because the clusters wrap around each other.**
+\newpage
 %-----------------------------------------------------------------%
-\subsection{Question 5}
+\newpage
+
+Introduction
+\subsection*{Singular value decomposition (SVD)}
+\textit{Source: : http://iridl.ldeo.columbia.edu/dochelp/StatTutorial/SVD/ \\}
+Singular value decomposition (SVD) is quite possibly the most widely-used multivariate statistical technique used in the atmospheric sciences. The technique was first introduced to meteorology in a 1956 paper by Edward Lorenz, in which he referred to the process as empirical orthogonal function (EOF) analysis. Today, it is also commonly known as principal-component analysis (PCA). All three names are still used, and refer to the same set of procedures within the Data Library. 
+
+
+The purpose of singular value decomposition is to reduce a dataset containing a large number of values to a dataset containing significantly fewer values, but which still contains a large fraction of the variability present in the original data. Often in the atmospheric and geophysical sciences, data will exhibit large spatial correlations. SVD analysis results in a more compact representation of these correlations, especially with multivariate datasets and can provide insight into spatial and temporal variations exhibited in the fields of data being analyzed. 
+
+
+There are a few caveats one should be aware of before computing the SVD of a set of data. First, the data must consist of anomalies. Secondly, the data should be de-trended. When trends in the data exist over time, the first structure often captures them. If the purpose of the analysis is to find spatial correlations independent of trends, the data should be de-trended before applying SVD analysis. 
+
+\newpage
+
+\subsection*{Question 5}
 Load the hand-written digits data using the following commands:
 
 \begin{framed}
@@ -152,13 +223,25 @@ image(im)
 
 
 Using the `zip2image` file, create an image matrix for the 8th and 18th rows.
-For each image matrix calculate the `svd` of the matrix (with no scaling). What
-is the percent variance explained by the first singular vector for the image
-from the 8th row? What is the percent variance explained for the image from the
-18th row? Why is the percent variance lower for the image from the 18th row?
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./DAquiz3Graph5b}
+\caption{}
+\label{fig:DAquiz3Graph5}
+\end{figure}
+For each image matrix calculate the `\textit{\textbf{svd}}` of the matrix (with no scaling). 
+
+\begin{itemize}
+\item[(i)] What is the percent variance explained by the \textbf{first} singular vector for the image
+from the 8th row? 
+\item[(ii)] What is the percent variance explained for the image from the
+18th row? (by the \textbf{first} singular vector)
+\item[(iii)] Why is the percent variance lower for the image from the 18th row?
+\end{itemize}
+\newpage
 \begin{framed}
 \begin{verbatim}
-## SHOW YOUR WORK:
+
 im8 <- zip2image(zip.train, 8)
 im18 <- zip2image(zip.train, 18)
 
@@ -166,13 +249,30 @@ svd8 <- svd(im8)
 svd18 <- svd(im18)
 
 par(mfrow=c(2,2))
-plot(svd8$d^2/sum(svd8$d^2),xlab="Column",ylab="Percent of variance explained",pch=19)
-plot(svd18$d^2/sum(svd18$d^2),xlab="Column",ylab="Percent of variance explained",pch=19)
+plot(svd8$d^2/sum(svd8$d^2),
+ xlab="Column",ylab="Percent of variance explained for Row 8",
+ pch=19)
+
+plot(svd18$d^2/sum(svd18$d^2),
+ xlab="Column",ylab="Percent of variance explained for Row 18",
+ pch=19)
+
 image(im8)
+
 image(im18)
+
 \end{verbatim}
 \end{framed}
+\newpage
+From the image - the second image is more complicated, so there are multiple patterns each explaining a large percentage of variance.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.0\linewidth]{./DAquiz3Graph5b}
+\caption{}
+\label{fig:DAquiz3Graph5}
+\end{figure}
 
+\end{document}
 ~~The first singular vector explains 98\% of the variance for row 8 and 48\% for row 18. 
 The reason the first singular vector explains less variance for the 18th row is because the 8th row has higher average values.~~
 **The first singular vector explains 98\% of the variance for row 8 and 48\% for row 18. 
