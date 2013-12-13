@@ -1,0 +1,49 @@
+
+# Load data
+
+load("samsungData.rda")
+
+# Preprocessing: renaming variables
+
+for (i in 1:561) {names(samsungData)[i] <- paste("var",i,sep="")}
+
+# Splitting the data into train and test sets
+train <- subset(samsungData,
+    samsungData$subject == 1 |
+    samsungData$subject == 3 |
+    samsungData$subject == 5 |
+    samsungData$subject == 6 |
+    samsungData$subject == 7 |
+    samsungData$subject == 8 |
+    samsungData$subject == 11 |
+    samsungData$subject == 14)
+nrow(train)
+# 2543
+
+test <- subset(samsungData,
+    samsungData$subject == 27 |
+    samsungData$subject == 28 |
+    samsungData$subject == 29 |
+    samsungData$subject == 30)
+nrow(test)
+# 1485
+
+# Remove subject
+train$subject <- NULL
+test$subject <- NULL
+
+# Make activity a factor variable
+train$activity <- as.factor(train$activity)
+test$activity <- as.factor(test$activity)
+
+# Build random forest
+rf <- randomForest(activity ~ ., data = train)
+
+# Output results including confusion matrix
+rf
+
+# Run prediction
+pr <- predict(rf, test)
+
+# Compute test error
+te <- sum(pr != test$activity)/length(pr)
