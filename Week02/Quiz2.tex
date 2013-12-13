@@ -40,10 +40,20 @@ In the text of the final write-up of a data analysis, how should the analyses be
 # assign to vector `simplyStats`
 simplyStats <- readLines( 
  url('http://simplystatistics.tumblr.com/'), 150)
+\end{verbatim}
+\end{framed}
 
+How many characters are in each element of `simplyStats`. 
+\begin{framed}
+\begin{verbatim}
 # apply `nchar()`
 simplyStatsChars <- nchar(simplyStats)
+\end{verbatim}
+\end{framed}
 
+How many characters long are the lines 2, 45, and 122?
+\begin{framed}
+\begin{verbatim}
 # how many characters long is line 2?
 nchar(simplyStats)[2]
 
