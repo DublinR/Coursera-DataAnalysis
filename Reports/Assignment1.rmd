@@ -1,5 +1,5 @@
 Assignment No 1
-
+==================================================
 The data above consist of a sample of 2,500 peer-to-peer loans issued through the Lending 
 Club (https://www.lendingclub.com/home.action). The interest rate of these loans is determined by the 
 Lending Club on the basis of characteristics of the person asking for the loan 
