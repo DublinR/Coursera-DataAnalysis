@@ -1,0 +1,47 @@
+###Random Forest####
+rf.output <- randomForest(activity ~ ., data=samsung.train[, -562], prox=TRUE)
+
+###Tree ####
+tree.output <- tree(activity ~ ., samsung.train[, -562])
+
+###SVM ####
+svm.output <- svm(activity ~ ., samsung.train[, -562])
+
+rf.predict <- rf.output$predicted
+
+svm.predict <- predict(svm.output, samsung.train)
+
+tree.predict <- predict(tree.output, samsung.train, type="class")
+
+sam.train <- data.frame("obs" = samsung.train[,563])
+sam.train$rf <- rf.predict
+sam.train$svm <- svm.predict
+sam.train$tree <- tree.predict
+sam.train$majority <- as.factor(names(sapply(apply(sam.train[,-1], 1, table), which.max))) 
+samError.train <- data.frame("vote" = length(which(sam.train$obs != sam.train$majority)) / nrow(sam.train))
+samError.train$rf <- length(which(sam.train$obs != sam.train$rf)) / nrow(sam.train)
+samError.train$svm <- length(which(sam.train$obs != sam.train$svm)) / nrow(sam.train)
+samError.train$tree <- length(which(sam.train$obs != sam.train$tree)) / nrow(sam.train)
+samError.train <- as.matrix(samError.train)
+
+###Function to run agasint test set####
+rf.predict <- predict(rf.output, samsung.test)
+
+svm.predict <- predict(svm.output, samsung.test)
+
+tree.predict <- predict(tree.output, samsung.test, type="class")
+
+sam.test <- data.frame("obs" = samsung.test[,563])
+sam.test$rf <- rf.predict
+sam.test$svm <- svm.predict
+sam.test$tree <- tree.predict
+sam.test$majority <- as.factor(names(sapply(apply(sam.test[,-1], 1, table), which.max)))
+samError.test <- data.frame("vote" = length(which(sam.test$obs != sam.test$majority)) / nrow(sam.test))
+samError.test$rf <- length(which(sam.test$obs != sam.test$rf)) / nrow(sam.test)
+samError.test$svm <- length(which(sam.test$obs != sam.test$svm)) / nrow(sam.test)
+samError.test$tree <- length(which(sam.test$obs != sam.test$tree)) / nrow(sam.test)
+samError.test <- as.matrix(samError.test)
+
+par(mfrow=c(2,1))
+barplot(samError.train, main="Error on Train Set", xlab="Models")
+barplot(samError.test, main="Error on Test Set", xlab="Models")
