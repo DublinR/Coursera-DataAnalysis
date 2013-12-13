@@ -1,7 +1,20 @@
-# Week 4 Quiz
+% Week 4 Quiz
+
+\documentclass[12pt]{article}
+
+%opening
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\begin{document}
+
+
+\section{Data Analysis : Week 4 Quiz}
+%--------------------------------------
 
 %--------------------------------------------------------------------%
-\subsection{Question 1}
+\subsection*{Question 1}
 Load the movies data available from the course website here: 
 
 https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt
@@ -24,54 +37,64 @@ lines(movies$box.office, moviesLM$fitted, col="red", lwd=3)
 moviesLM$coefficients
 \end{verbatim}
 
-**The regression coefficient is 0.09676. The interpretation is that an increase
-of one million dollars in box office gross is associated with a 0.09676 increase
-in Rotten Tomatoes Score.**
+%**The regression coefficient is 0.09676. The interpretation is that an increase
+%of one million dollars in box office gross is associated with a 0.09676 increase
+%in Rotten Tomatoes Score.**
 %--------------------------------------------------------------------%
-\subsection{Question 2}
+\subsection*{Question 2}
 
 Load the movies data available from the course website here: 
 
+\begin{verbatim}
 https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt
+\end{verbatim}
 
 Fit a linear regression model by least squares where the Rotten Tomatoes score
-is the outcome and the box office gross is the only covariate. What is the 90%
-confidence interval for the intercept term and what can you deduce from the 90%
+is the outcome and the box office gross is the only covariate. What is the 90\%
+confidence interval for the intercept term and what can you deduce from the 90\%
 confidence interval?
 
-```{r}
-## already have the data...
-
+\begin{framed}
+\begin{verbatim}
 confint(moviesLM,level=0.9)
-```
+\end{verbatim}
+\end{framed}
 **The 90% confidence interval for the intercept is (47.52, 52.63). If we
 repeated this study 100 times, we would expect our calculated interval to cover
 the true value on average 90% of the time.**
 %--------------------------------------------------------------------%
+\newpage
 \subsection*{Question 3}
 
 Load the movies data available from the course website here: 
 
+\begin{verbatim}
 https://spark-public.s3.amazonaws.com/dataanalysis/movies.txt 
+\end{verbatim}
+
 
 Fit a linear regression model by least squares where the Rotten Tomatoes score
 is the outcome and box office gross and running time are the covariates. What is
 the value for the regression coefficient for running time? How is it interpreted?
 
+\begin{framed}
 \begin{verbatim}
-# already have the data...
+
 
 plot(movies$running.time, movies$score)
 moviesLM2 <- lm(movies$score ~ movies$box.office + movies$running.time)
-lines(movies$running.time, moviesLM2$fitted, col="red", lwd=3)
-# well clearly that isn't right
 
 moviesLM2$coefficients
 \end{verbatim}
-**The coefficient is 0.12752. That means that if two movies have the same box
-office gross, an increase of one minute in running time is associated with an
-average increase of 0.12752 in score.**
+\end{framed}
+% lines(movies$running.time, moviesLM2$fitted, col="red", lwd=3)
+
+
+%**The coefficient is 0.12752. That means that if two movies have the same box
+%office gross, an increase of one minute in running time is associated with an
+%average increase of 0.12752 in score.**
 %--------------------------------------------------------------------%
+\newpage
 \subsection*{Question 4}
 
 Load the movies data available from the course website here: 
@@ -140,6 +163,7 @@ summary(lmNoAdjust)
 line, the running time coefficient has a larger magnitude and is more
 statistically significant.**
 %--------------------------------------------------------------------%
+\newpage
 \subsection{Question 6}
 
 Load the movies data available from the course website here: 
@@ -223,9 +247,9 @@ summary(warpLM)
 %**(-3.23, 12.67)**
 %(though I'll admit I don't know how I got here...)
 
-**LATER:** BLN says: go back to the "Regression with Factor Variables" lecture
-and zero in on "Question 2" ("What is the average difference in rating b/w PG-13
-and R-rated movies?") -- it's in there as `relevel`.
+%**LATER:** BLN says: go back to the "Regression with Factor Variables" lecture
+%and zero in on "Question 2" ("What is the average difference in rating b/w PG-13
+%and R-rated movies?") -- it's in there as `relevel`.
 %--------------------------------------------------------------------%
 \subsection*{Question 10}
 
