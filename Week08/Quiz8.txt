@@ -1,3 +1,13 @@
+\documentclass[12pt]{article}
+
+%opening
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\begin{document}
+
+
 \section{Data Analysis : Week 8 Quiz}
 %--------------------------------------------------------------------%
 
@@ -6,13 +16,13 @@
 
 % http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf
 Why Multiple Testing Matters
-In general, if we perform m hypothesis tests, what isthe
+In general, if we perform m hypothesis tests, what is the
 probability of at least 1 false positive?
 \begin{itemize}
-\item P(Making an error) = $\alpha
-\item (Not making an error) = $1 - \alpha
-\item (Not making an error in m tests) = $(1 - \alpha)^m$
-\item (Making at least 1 error in m tests) = $1 - (1 - \alpha)^m$
+\item P(Making an error) = $\alpha$
+\item P(Not making an error) = $1 - \alpha$
+\item P(Not making an error in m tests) = $(1 - \alpha)^m$
+\item P(Making at least 1 error in m tests) = $1 - (1 - \alpha)^m$
 \end{itemize}
 
 %--------------------------------------------------------------------%
@@ -26,14 +36,16 @@ Suppose this is the result of 85 hypothesis tests:
 What is the 
 (observed) rate of false discoveries? What is the (observed) rate of
 false positives?
-\item False discovery rate = 0.25 False positive rate = 0.10~~  
-\item False discovery rate = 0.09 False positive rate = 0.20~~  \item False discovery rate = 0.17 False positive rate = 0.33~~  
-**False discovery rate = 0.20 
-False positive rate = 0.09**  \item False discovery rate = 0.33 False positive rate = 0.17~~
-
+\begin{itemize}
+\item False discovery rate = 0.25 False positive rate = 0.10  
+\item False discovery rate = 0.09 False positive rate = 0.20  
+\item False discovery rate = 0.17 False positive rate = 0.33  
+\item False discovery rate = 0.20 False positive rate = 0.09  
+\item False discovery rate = 0.33 False positive rate = 0.17
+\end{itemize}
 
 %--------------------------------------------------------------------%
-\newppage
+\newpage
 \subsection*{Question 2}
 Generate P-values according to the following code:
 
@@ -54,85 +66,11 @@ How many are significant at the alpha = 0.1 level when controlling the family
 wise error rate using the methods described in the lectures? 
 When controlling the false discovery rate at the alpha = 0.1 level as described in the lectures?
 \begin{enumerate}
-\item FWER = 61 FDR = 7~~  **FWER = 7 FDR = 61**  
-\item FWER = 5 FDR = 32~~  
-\item FWER = 3 FDR = 13~~  
-\item FWER = 3 FDR = 5~~  
-\item FWER = 32 FDR = 5~~
+\item FWER = 61 FDR = 7
+\item FWER = 7 FDR = 61 
+\item FWER = 5 FDR = 32  
+\item FWER = 3 FDR = 13 
+\item FWER = 3 FDR = 5  
+\item FWER = 32 FDR = 5
 \end{enumerate}
-
-%--------------------------------------------------------------------%
-\newpage
-\subsection*{Question 3}
-Suppose I want to generate data from the following model with a simulation:
-
-
-\begin{framed} 
-\begin{equation}
-y = b0 + b1*x + b2*z + e
-\end{equation}
-\end{framed}
-
-where b0=1, b1=2, b2=3 and x, z, and e are normally distributed. 
-Which one of
-the following is not a step 
-in the simulation process?
-
-\begin{enumerate}
-\item Generate the y-values by adding yfit+e~~  \item Generate x, z, and e using rnorm()~~  
-\item Generate the fitted values by adding yfit = 1 + 2*x + 3*z~~  \item Generate a random sample of values for b_0, b_1, and b_2~~  
-**Generate y 
-from a normal distribution, then subtract random variables e and add back b0 + b1*x + b2*z**
-\end{enumerate}
-%--------------------------------------------------------------------%
-\newpage
-\subsection*{Question 4}
-Suppose data are generated from a model:
-
-\begin{framed} 
-\begin{verbatim}
-y = b0 + b1*x + e
-\end{verbatim}
-\end{framed}
-
-where b0=1, b1=2 and x and e both have a normal 
-distribution with mean zero and
-variance one. After the data are created, some data are lost. Use the `lm()`
-function in base R for model fitting. 
-**Case 1:** 
-Build a simulation where all
-values of y are observed but higher values of x are likely to be missing. 
-Does
- the estimate of b1 change on average? If so how? **Case 2:** Build a simulation
-where all values of x are observed but 
-higher values of y are likely to be
-missing. Does the estimate of b1 change on average? If so how?
-
-
-\item Case 1: b1 is overestimated 
-Case 2: b1 is overestimated~~  
-**Case 1: b1 is estimated correctly Case 2: b1 is underestimated**  
-\item Case 1: b1 is underestimated Case 2: 
-b1 is underestimated~~  \item Case 1: b1 is overestimated Case 2: b1 is estimated correctly~~  \item Case 1: b1 is overestimated Case 2: b1 is underestimated~~  
-\item Case 1: b1 is underestimated Case 2: b1 is estimated correctly~~
-
-%--------------------------------------------------------------------%
-
-\subsection*{Question 5}
-Exactly as in the last question, suppose data are generated from a model:
-
-y = b0 + b1*x + e
-
-
-where b0=1, b1=2 and x and e both have a normal distribution with mean zero and
-variance one. After the data are created, some data are lost. 
-Answer the same
-questions below, but this time, use the rlm() function in the MASS package to
-fit the linear model instead of the lm() function in base R. **Case 1:** Build a
-simulation where all values of y are observed but higher values of x are likely
-to be missing. Does the estimate of b1 change on average? If so how? **Case 2:**
-Build a simulation where all values of x are observed but higher values of y are
-likely to be missing. Does the estimate of b1 change on average? If so how?
-\item Case 1: b1 is overestimated Case 2: b1 is overestimated~~  
-**Case 1: b1 is estimated correctly Case 2: b1 is underestimated**  \item Case 1: b1 is overestimated Case 2: b1 is estimated correctly~~  \item Case 1: b1 is underestimated Case 2: b1 is underestimated~~  
-\item Case 1: b1 is underestimated Case 2: b1 is estimated correctly~~  \item Case 1: b1 is overestimated Case 2: b1 is underestimated~~
+\end{document}
