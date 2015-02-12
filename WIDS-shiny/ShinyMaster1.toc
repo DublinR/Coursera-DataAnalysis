@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {1}{Part 1}{1}{0}{1}
+\beamer@sectionintoc {2}{Part 2}{11}{0}{2}
+\beamer@sectionintoc {3}{Ractive Programming}{20}{0}{3}

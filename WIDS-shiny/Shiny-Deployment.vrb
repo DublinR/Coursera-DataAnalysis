@@ -1,0 +1,12 @@
+\frametitle{Deploying Shiny}
+\textbf{Making it into a Package}
+\begin{itemize}
+\item If your Shiny app is useful to a broader audience, it might be worth the effort to turn it into an \texttt{R} package. Put your Shiny application directory under the package’s inst directory, then create and export a function that contains something like this:
+\begin{framed}
+\begin{verbatim}
+shiny::runApp(system.file('appdir',
+ package='packagename'))
+\end{verbatim}
+\end{framed}
+where \texttt{appdir} is the name of your app’s subdirectory in inst, and \textbf{\emph{packagename}} is the name of your package.
+\end{itemize}

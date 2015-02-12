@@ -1,0 +1,16 @@
+\Large
+\frametitle{Reactive Programming}
+
+Simple \texttt{R} example re: reactivity
+\begin{framed}
+\begin{verbatim}
+> A <- 5
+> B <- A + 3
+> A <-6         #Update A
+>
+> c(A,B,A+3)
+[1] 6 8 9
+>
+\end{verbatim}
+\end{framed}
+Compare this with Microsoft Excel Spreadsheets
